@@ -13,6 +13,7 @@
 			buildPhases = (
 			);
 			dependencies = (
+				7D6880B315A8B9E500E51F96 /* PBXTargetDependency */,
 			);
 			name = Framework;
 			productName = Framework;
@@ -34,6 +35,16 @@
 		7D6880AB15A8B73200E51F96 /* SLTickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D68809315A7964500E51F96 /* SLTickerView.m */; };
 		7D6880AC15A8B73700E51F96 /* SLTickerView.h in Headers */ = {isa = PBXBuildFile; fileRef = 7D68809215A7964500E51F96 /* SLTickerView.h */; settings = {ATTRIBUTES = (Public, ); }; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		7D6880B215A8B9E500E51F96 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 7D68806815A7960400E51F96 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 7D68809E15A8B6AB00E51F96;
+			remoteInfo = Ticker;
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		7D68807115A7960400E51F96 /* TickerDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TickerDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -280,6 +291,14 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		7D6880B315A8B9E500E51F96 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 7D68809E15A8B6AB00E51F96 /* Ticker */;
+			targetProxy = 7D6880B215A8B9E500E51F96 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		7D68807E15A7960400E51F96 /* InfoPlist.strings */ = {
