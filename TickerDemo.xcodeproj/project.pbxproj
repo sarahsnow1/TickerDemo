@@ -335,6 +335,7 @@
 				GCC_PREFIX_HEADER = "Ticker/Ticker-Prefix.pch";
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PUBLIC_HEADERS_FOLDER_PATH = "$(PROJECT_NAME)Headers";
 				SKIP_INSTALL = YES;
 			};
 			name = Debug;
@@ -347,6 +348,7 @@
 				GCC_PREFIX_HEADER = "Ticker/Ticker-Prefix.pch";
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PUBLIC_HEADERS_FOLDER_PATH = "$(PROJECT_NAME)Headers";
 				SKIP_INSTALL = YES;
 			};
 			name = Release;
