@@ -6,6 +6,19 @@
 	objectVersion = 46;
 	objects = {
 
+/* Begin PBXAggregateTarget section */
+		7D6880AE15A8B9C400E51F96 /* Framework */ = {
+			isa = PBXAggregateTarget;
+			buildConfigurationList = 7D6880AF15A8B9C400E51F96 /* Build configuration list for PBXAggregateTarget "Framework" */;
+			buildPhases = (
+			);
+			dependencies = (
+			);
+			name = Framework;
+			productName = Framework;
+		};
+/* End PBXAggregateTarget section */
+
 /* Begin PBXBuildFile section */
 		7D68807615A7960400E51F96 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7D68807515A7960400E51F96 /* UIKit.framework */; };
 		7D68807815A7960400E51F96 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7D68807715A7960400E51F96 /* Foundation.framework */; };
@@ -213,6 +226,7 @@
 			targets = (
 				7D68807015A7960400E51F96 /* TickerDemo */,
 				7D68809E15A8B6AB00E51F96 /* Ticker */,
+				7D6880AE15A8B9C400E51F96 /* Framework */,
 			);
 		};
 /* End PBXProject section */
@@ -376,6 +390,20 @@
 			};
 			name = Release;
 		};
+		7D6880B015A8B9C400E51F96 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		7D6880B115A8B9C400E51F96 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -402,6 +430,14 @@
 			buildConfigurations = (
 				7D6880A715A8B6AB00E51F96 /* Debug */,
 				7D6880A815A8B6AB00E51F96 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		7D6880AF15A8B9C400E51F96 /* Build configuration list for PBXAggregateTarget "Framework" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				7D6880B015A8B9C400E51F96 /* Debug */,
+				7D6880B115A8B9C400E51F96 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 		};
