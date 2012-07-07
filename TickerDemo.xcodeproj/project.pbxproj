@@ -18,6 +18,8 @@
 		7D68809615A796C900E51F96 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7D68809515A796C900E51F96 /* QuartzCore.framework */; };
 		7D6880A015A8B6AB00E51F96 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7D68807715A7960400E51F96 /* Foundation.framework */; };
 		7D6880A615A8B6AB00E51F96 /* Ticker.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D6880A515A8B6AB00E51F96 /* Ticker.m */; };
+		7D6880AB15A8B73200E51F96 /* SLTickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D68809315A7964500E51F96 /* SLTickerView.m */; };
+		7D6880AC15A8B73700E51F96 /* SLTickerView.h in Headers */ = {isa = PBXBuildFile; fileRef = 7D68809215A7964500E51F96 /* SLTickerView.h */; settings = {ATTRIBUTES = (Public, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -145,6 +147,7 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7D6880AC15A8B73700E51F96 /* SLTickerView.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -241,6 +244,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				7D6880A615A8B6AB00E51F96 /* Ticker.m in Sources */,
+				7D6880AB15A8B73200E51F96 /* SLTickerView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

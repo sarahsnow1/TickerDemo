@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <Ticker/SLTickerView.h>
 
 @interface Ticker : NSObject
 
