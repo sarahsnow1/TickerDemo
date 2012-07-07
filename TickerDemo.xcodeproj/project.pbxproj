@@ -16,6 +16,8 @@
 		7D68808915A7960400E51F96 /* SLViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D68808815A7960400E51F96 /* SLViewController.m */; };
 		7D68809415A7964500E51F96 /* SLTickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D68809315A7964500E51F96 /* SLTickerView.m */; };
 		7D68809615A796C900E51F96 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7D68809515A796C900E51F96 /* QuartzCore.framework */; };
+		7D6880A015A8B6AB00E51F96 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7D68807715A7960400E51F96 /* Foundation.framework */; };
+		7D6880A615A8B6AB00E51F96 /* Ticker.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D6880A515A8B6AB00E51F96 /* Ticker.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -34,6 +36,10 @@
 		7D68809215A7964500E51F96 /* SLTickerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SLTickerView.h; sourceTree = "<group>"; };
 		7D68809315A7964500E51F96 /* SLTickerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SLTickerView.m; sourceTree = "<group>"; };
 		7D68809515A796C900E51F96 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		7D68809F15A8B6AB00E51F96 /* libTicker.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libTicker.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		7D6880A315A8B6AB00E51F96 /* Ticker-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Ticker-Prefix.pch"; sourceTree = "<group>"; };
+		7D6880A415A8B6AB00E51F96 /* Ticker.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Ticker.h; sourceTree = "<group>"; };
+		7D6880A515A8B6AB00E51F96 /* Ticker.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Ticker.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -48,6 +54,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		7D68809C15A8B6AB00E51F96 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7D6880A015A8B6AB00E51F96 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -55,6 +69,7 @@
 			isa = PBXGroup;
 			children = (
 				7D68807B15A7960400E51F96 /* TickerDemo */,
+				7D6880A115A8B6AB00E51F96 /* Ticker */,
 				7D68807415A7960400E51F96 /* Frameworks */,
 				7D68807215A7960400E51F96 /* Products */,
 			);
@@ -64,6 +79,7 @@
 			isa = PBXGroup;
 			children = (
 				7D68807115A7960400E51F96 /* TickerDemo.app */,
+				7D68809F15A8B6AB00E51F96 /* libTicker.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -104,7 +120,35 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		7D6880A115A8B6AB00E51F96 /* Ticker */ = {
+			isa = PBXGroup;
+			children = (
+				7D6880A415A8B6AB00E51F96 /* Ticker.h */,
+				7D6880A515A8B6AB00E51F96 /* Ticker.m */,
+				7D6880A215A8B6AB00E51F96 /* Supporting Files */,
+			);
+			path = Ticker;
+			sourceTree = "<group>";
+		};
+		7D6880A215A8B6AB00E51F96 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				7D6880A315A8B6AB00E51F96 /* Ticker-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		7D68809D15A8B6AB00E51F96 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
 		7D68807015A7960400E51F96 /* TickerDemo */ = {
@@ -123,6 +167,23 @@
 			productName = TickerDemo;
 			productReference = 7D68807115A7960400E51F96 /* TickerDemo.app */;
 			productType = "com.apple.product-type.application";
+		};
+		7D68809E15A8B6AB00E51F96 /* Ticker */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 7D6880A915A8B6AB00E51F96 /* Build configuration list for PBXNativeTarget "Ticker" */;
+			buildPhases = (
+				7D68809B15A8B6AB00E51F96 /* Sources */,
+				7D68809C15A8B6AB00E51F96 /* Frameworks */,
+				7D68809D15A8B6AB00E51F96 /* Headers */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Ticker;
+			productName = Ticker;
+			productReference = 7D68809F15A8B6AB00E51F96 /* libTicker.a */;
+			productType = "com.apple.product-type.library.static";
 		};
 /* End PBXNativeTarget section */
 
@@ -147,6 +208,7 @@
 			projectRoot = "";
 			targets = (
 				7D68807015A7960400E51F96 /* TickerDemo */,
+				7D68809E15A8B6AB00E51F96 /* Ticker */,
 			);
 		};
 /* End PBXProject section */
@@ -171,6 +233,14 @@
 				7D68808615A7960400E51F96 /* SLAppDelegate.m in Sources */,
 				7D68808915A7960400E51F96 /* SLViewController.m in Sources */,
 				7D68809415A7964500E51F96 /* SLTickerView.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		7D68809B15A8B6AB00E51F96 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7D6880A615A8B6AB00E51F96 /* Ticker.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -253,6 +323,30 @@
 			};
 			name = Release;
 		};
+		7D6880A715A8B6AB00E51F96 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				DSTROOT = /tmp/Ticker.dst;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Ticker/Ticker-Prefix.pch";
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		7D6880A815A8B6AB00E51F96 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				DSTROOT = /tmp/Ticker.dst;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Ticker/Ticker-Prefix.pch";
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -270,6 +364,15 @@
 			buildConfigurations = (
 				7D68809015A7960400E51F96 /* Debug */,
 				7D68809115A7960400E51F96 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		7D6880A915A8B6AB00E51F96 /* Build configuration list for PBXNativeTarget "Ticker" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				7D6880A715A8B6AB00E51F96 /* Debug */,
+				7D6880A815A8B6AB00E51F96 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 		};
