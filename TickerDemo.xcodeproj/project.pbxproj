@@ -178,6 +178,7 @@
 				7D68809B15A8B6AB00E51F96 /* Sources */,
 				7D68809C15A8B6AB00E51F96 /* Frameworks */,
 				7D68809D15A8B6AB00E51F96 /* Headers */,
+				7D6880AD15A8B95200E51F96 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -226,6 +227,22 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		7D6880AD15A8B95200E51F96 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "/Users/sarahlensing/Projects/Objective-C/TickerDemo/scripts/prepare_framework.sh";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		7D68806D15A7960400E51F96 /* Sources */ = {
