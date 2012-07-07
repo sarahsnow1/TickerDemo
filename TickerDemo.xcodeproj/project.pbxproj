@@ -11,6 +11,7 @@
 			isa = PBXAggregateTarget;
 			buildConfigurationList = 7D6880AF15A8B9C400E51F96 /* Build configuration list for PBXAggregateTarget "Framework" */;
 			buildPhases = (
+				7D6880B415A8BA0C00E51F96 /* ShellScript */,
 			);
 			dependencies = (
 				7D6880B315A8B9E500E51F96 /* PBXTargetDependency */,
@@ -266,6 +267,19 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "/Users/sarahlensing/Projects/Objective-C/TickerDemo/scripts/prepare_framework.sh";
+		};
+		7D6880B415A8BA0C00E51F96 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "/Users/sarahlensing/Projects/Objective-C/TickerDemo/scripts/build_framework.sh";
 		};
 /* End PBXShellScriptBuildPhase section */
 
