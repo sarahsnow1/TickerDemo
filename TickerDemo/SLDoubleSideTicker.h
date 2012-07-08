@@ -10,7 +10,7 @@
 
 @class SLDoubleSideTicker;
 @protocol SLDoubleSideTickerDelegate <NSObject>
--(void)tickerView:(SLDoubleSideTicker *)tickerView didUpdateRotationTransform:(CGFloat)y;
+-(void)ticker:(SLDoubleSideTicker *)ticker didUpdateRotationTransform:(CGFloat)y;
 @end
 
 @interface SLDoubleSideTicker : NSObject <SLTickerViewDelegate> {
@@ -30,7 +30,7 @@
 @property (nonatomic, assign) UIView *frontView;
 
 - (id)initWithFrame:(CGRect)frame superView:(UIView *)superview;
-
+- (void)bringToFront;
 - (void)updateRotationTransform:(CGFloat)y;
 
 @end

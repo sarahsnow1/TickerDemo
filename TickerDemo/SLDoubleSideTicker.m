@@ -87,11 +87,16 @@
 - (void)tickerView:(SLTickerView *)tickerView didUpdateRotationTransform:(CGFloat)y {
     [_backTicker updateRotationTransform:y];
     if (_delegate) {
-        [_delegate tickerView:self didUpdateRotationTransform:y];
+        [_delegate ticker:self didUpdateRotationTransform:y];
     }
 }
 
 #pragma mark - SLDoubleSideTickerView
+- (void)bringToFront {
+    [_view bringSubviewToFront:_backTicker];
+    [_view bringSubviewToFront:_frontTicker];    
+}
+
 - (void)updateRotationTransform:(CGFloat)y {
     [_frontTicker updateRotationTransform:y];
 }
