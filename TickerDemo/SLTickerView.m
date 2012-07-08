@@ -1,4 +1,4 @@
-//
+        //
 //  SLTickerView.m
 //  TickerDemo
 //
@@ -18,7 +18,8 @@
     CATransform3D myTransform = CATransform3DIdentity;
     float zzz= 1000;
     myTransform.m34 = -1/zzz;
-    self.layer.transform = myTransform;
+    self.layer.transform = myTransform;    
+    //self.layer.sublayerTransform = myTransform;
 }
 
 - (void)configureAnchor {
@@ -45,12 +46,12 @@
     self = [super initWithFrame:frame];
     if (self) {
         self.userInteractionEnabled = YES;
-        
+
         [self addPerspective];
         [self configureAnchor];
         [self configureFlipSpeed];
         [self configureMinMax];
-        [self addGesture];    
+        [self addGesture];   
         
     }
     return self;
