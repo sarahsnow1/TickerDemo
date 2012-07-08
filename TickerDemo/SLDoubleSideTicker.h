@@ -10,7 +10,10 @@
 
 @class SLDoubleSideTicker;
 @protocol SLDoubleSideTickerDelegate <NSObject>
+@optional
 -(void)ticker:(SLDoubleSideTicker *)ticker didUpdateRotationTransform:(CGFloat)y;
+- (void)tickerFlippedToFront:(SLDoubleSideTicker *)ticker;
+- (void)tickerFlippedToBack:(SLDoubleSideTicker *)ticker;
 @end
 
 @interface SLDoubleSideTicker : NSObject <SLTickerViewDelegate> {
@@ -28,9 +31,12 @@
 @property (nonatomic, assign) UIColor *frontBackgroundColor;
 @property (nonatomic, assign) UIView *backView;
 @property (nonatomic, assign) UIView *frontView;
+@property (nonatomic, readonly) BOOL hidden;
 
 - (id)initWithFrame:(CGRect)frame superView:(UIView *)superview;
 - (void)bringToFront;
+- (void)sendToBack;
 - (void)updateRotationTransform:(CGFloat)y;
+- (void)reset;
 
 @end

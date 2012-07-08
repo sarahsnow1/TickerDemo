@@ -19,10 +19,18 @@ typedef enum {
     TickerViewAnchorBottom
 }TickerViewAnchorType;
 
+typedef enum {
+    TickerViewAnchorFront,
+    TickerViewAnchorBack
+}TickerViewVisibleState;
+
 @class SLTickerView;
 
 @protocol SLTickerViewDelegate <NSObject>
+@optional
 -(void)tickerView:(SLTickerView *)tickerView didUpdateRotationTransform:(CGFloat)y;
+- (void)tickerViewFlippedToFront:(SLTickerView *)tickerView;
+- (void)tickerViewFlippedToBack:(SLTickerView *)tickerView;
 @end
 
 @interface SLTickerView : UIView<UIGestureRecognizerDelegate> {
@@ -32,6 +40,8 @@ typedef enum {
     
     BOOL _normalPanStart;
     UIPanGestureRecognizer *_pan;    
+    
+    TickerViewVisibleState _visibleState;
 }
 
 @property (nonatomic, assign) id<SLTickerViewDelegate>delegate;

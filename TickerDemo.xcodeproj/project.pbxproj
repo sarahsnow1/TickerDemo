@@ -22,6 +22,9 @@
 /* End PBXAggregateTarget section */
 
 /* Begin PBXBuildFile section */
+		7D22CFB515A9B95900EA7862 /* SLContinuousTicker.h in Headers */ = {isa = PBXBuildFile; fileRef = 7D22CFB315A9B95900EA7862 /* SLContinuousTicker.h */; };
+		7D22CFB615A9B95900EA7862 /* SLContinuousTicker.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D22CFB415A9B95900EA7862 /* SLContinuousTicker.m */; };
+		7D22CFB715A9B95900EA7862 /* SLContinuousTicker.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D22CFB415A9B95900EA7862 /* SLContinuousTicker.m */; };
 		7D68807615A7960400E51F96 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7D68807515A7960400E51F96 /* UIKit.framework */; };
 		7D68807815A7960400E51F96 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7D68807715A7960400E51F96 /* Foundation.framework */; };
 		7D68807A15A7960400E51F96 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7D68807915A7960400E51F96 /* CoreGraphics.framework */; };
@@ -51,6 +54,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		7D22CFB315A9B95900EA7862 /* SLContinuousTicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SLContinuousTicker.h; sourceTree = "<group>"; };
+		7D22CFB415A9B95900EA7862 /* SLContinuousTicker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SLContinuousTicker.m; sourceTree = "<group>"; };
 		7D68807115A7960400E51F96 /* TickerDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TickerDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7D68807515A7960400E51F96 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		7D68807715A7960400E51F96 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -138,6 +143,8 @@
 				7D68809315A7964500E51F96 /* SLTickerView.m */,
 				7D68817415A94DE000E51F96 /* SLDoubleSideTicker.h */,
 				7D68817515A94DE000E51F96 /* SLDoubleSideTicker.m */,
+				7D22CFB315A9B95900EA7862 /* SLContinuousTicker.h */,
+				7D22CFB415A9B95900EA7862 /* SLContinuousTicker.m */,
 				7D68807C15A7960400E51F96 /* Supporting Files */,
 			);
 			path = TickerDemo;
@@ -181,6 +188,7 @@
 			files = (
 				7D6880AC15A8B73700E51F96 /* SLTickerView.h in Headers */,
 				7D68817615A94DE000E51F96 /* SLDoubleSideTicker.h in Headers */,
+				7D22CFB515A9B95900EA7862 /* SLContinuousTicker.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -301,6 +309,7 @@
 				7D68808915A7960400E51F96 /* SLViewController.m in Sources */,
 				7D68809415A7964500E51F96 /* SLTickerView.m in Sources */,
 				7D68817715A94DE000E51F96 /* SLDoubleSideTicker.m in Sources */,
+				7D22CFB615A9B95900EA7862 /* SLContinuousTicker.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -311,6 +320,7 @@
 				7D6880A615A8B6AB00E51F96 /* Ticker.m in Sources */,
 				7D6880AB15A8B73200E51F96 /* SLTickerView.m in Sources */,
 				7D68817815A94DE000E51F96 /* SLDoubleSideTicker.m in Sources */,
+				7D22CFB715A9B95900EA7862 /* SLContinuousTicker.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

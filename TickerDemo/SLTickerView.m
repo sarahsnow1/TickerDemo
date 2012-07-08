@@ -46,7 +46,8 @@
     self = [super initWithFrame:frame];
     if (self) {
         self.userInteractionEnabled = YES;
-
+        _visibleState = TickerViewAnchorFront;
+        
         [self addPerspective];
         [self configureAnchor];
         [self configureFlipSpeed];
@@ -148,15 +149,37 @@
         }
         [UIView animateWithDuration:0.5 animations:^{
             [self updateRotationTransform:newY];
+        } completion:^(BOOL finished) {
+            [self handleFlippedDelegateCalls:newY];
         }];
     }
 }
 
 - (void)updateRotationTransform:(CGFloat)y {
     [self.layer setValue:[NSNumber numberWithFloat:y] forKeyPath:@"transform.rotation.x"]; 
-    if (self.delegate) {
-        [self.delegate tickerView:self didUpdateRotationTransform:y];
+    if (_delegate && [_delegate respondsToSelector:@selector(tickerView:didUpdateRotationTransform:)]) {
+        [_delegate tickerView:self didUpdateRotationTransform:y];        
+    }    
+    [self handleFlippedDelegateCalls:y];    
+}
+
+- (void)handleFlippedDelegateCalls:(CGFloat)y {
+    if (_pan.state != UIGestureRecognizerStateBegan && _pan.state != UIGestureRecognizerStateChanged) {
+        
+        if (fabsf(y) == 0 && _visibleState != TickerViewAnchorFront) {
+            _visibleState = TickerViewAnchorFront;
+            if (_delegate && [_delegate respondsToSelector:@selector(tickerViewFlippedToFront:)]) {
+                [_delegate tickerViewFlippedToFront:self];                
+            }
+        }
+        else if (fabsf(y) >= 3.141 && _visibleState != TickerViewAnchorBack) { //approx of M_PI
+            _visibleState = TickerViewAnchorBack;
+            if (_delegate && [_delegate respondsToSelector:@selector(tickerViewFlippedToBack:)]) {
+                [_delegate tickerViewFlippedToBack:self];
+            }
+        }
     }
 }
+
 
 @end

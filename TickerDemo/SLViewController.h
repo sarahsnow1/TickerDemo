@@ -7,13 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "SLDoubleSideTicker.h"
+#import "SLContinuousTicker.h"
 
-@interface SLViewController : UIViewController <SLDoubleSideTickerDelegate> {
-    
-    SLDoubleSideTicker *_tickerA;
-    SLDoubleSideTicker *_tickerB;
-    SLDoubleSideTicker *_tickerC;    
+@interface SLViewController : UIViewController <SLContinuousTickerDelegate, SLTickerViewDelegate> {
+    SLContinuousTicker *_ticker;    
+    SLTickerView *_testTicker;
 }
 
 @end

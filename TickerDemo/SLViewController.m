@@ -15,8 +15,20 @@
 
 @implementation SLViewController
 
-- (void)ticker:(SLDoubleSideTicker *)ticker didUpdateRotationTransform:(CGFloat)y {
-    [ticker bringToFront];
+- (void)ticker:(SLContinuousTicker *)ticker didUpdateRotationTransform:(CGFloat)y {
+//    [ticker bringToFront];
+}
+
+-(void)tickerView:(SLTickerView *)tickerView didUpdateRotationTransform:(CGFloat)y {
+    //do nothing
+}
+
+- (void)tickerViewFlippedToFront:(SLTickerView *)tickerView {
+    NSLog(@"front");
+}
+
+- (void)tickerViewFlippedToBack:(SLTickerView *)tickerView {
+    NSLog(@"back");    
 }
 
 - (UILabel *)labelWithText:(NSString *)text {
@@ -32,29 +44,17 @@
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];
             
-    _tickerA = [[SLDoubleSideTicker alloc] initWithFrame:CGRectMake(50, 50, 100, 150) superView:self.view];
-    _tickerA.delegate = self;
-    _tickerA.position = CGPointMake(150, 200);
-    _tickerA.frontBackgroundColor = [UIColor greenColor];
-    _tickerA.backBackgroundColor = [UIColor greenColor];
-    _tickerA.frontView = [self labelWithText:@"Awesome.\n(front)"];
-    _tickerA.backView = [self labelWithText:@"Awesome.\n(back)"];
+    _ticker = [[SLContinuousTicker alloc] initWithFrame:CGRectMake(50, 50, 100, 150) superView:self.view];
+    _ticker.delegate = self;
+    _ticker.position = CGPointMake(250, 200);
     
-    _tickerB = [[SLDoubleSideTicker alloc] initWithFrame:CGRectMake(50, 50, 100, 150) superView:self.view];
-    _tickerB.delegate = self;
-    _tickerB.position = CGPointMake(150, 200);
-    _tickerB.frontBackgroundColor = [UIColor blueColor];
-    _tickerB.backBackgroundColor = [UIColor blueColor];
-    _tickerB.frontView = [self labelWithText:@"Success.\n(front)"];
-    _tickerB.backView = [self labelWithText:@"Success.\n(back)"];
+    _testTicker = [[SLTickerView alloc] initWithFrame:CGRectMake(50, 50, 100, 150)];
+    _testTicker.backgroundColor = [UIColor greenColor];
+    _testTicker.layer.position = CGPointMake(100, 200);
+    _testTicker.anchorType = TickerViewAnchorTop;
+    _testTicker.delegate = self;
+    [self.view addSubview:_testTicker];
     
-    _tickerC = [[SLDoubleSideTicker alloc] initWithFrame:CGRectMake(50, 50, 100, 150) superView:self.view];
-    _tickerC.delegate = self;
-    _tickerC.position = CGPointMake(150, 200);
-    _tickerC.frontBackgroundColor = [UIColor orangeColor];
-    _tickerC.backBackgroundColor = [UIColor orangeColor];
-    _tickerC.frontView = [self labelWithText:@"Complete.\n(front)"];
-    _tickerC.backView = [self labelWithText:@"Complete.\n(back)"];
 }
 
 @end

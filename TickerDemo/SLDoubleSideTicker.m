@@ -18,6 +18,7 @@
 @synthesize frontBackgroundColor = _frontBackgroundColor;
 @synthesize backView = _backView;
 @synthesize frontView = _frontView;
+@synthesize hidden = _hidden;
 
 - (void)createFrontTicker {
     _frontTicker = [[SLTickerView alloc] initWithFrame:_frame];
@@ -86,9 +87,21 @@
 #pragma mark - SLTickerViewDelegate
 - (void)tickerView:(SLTickerView *)tickerView didUpdateRotationTransform:(CGFloat)y {
     [_backTicker updateRotationTransform:y];
-    if (_delegate) {
+    if (_delegate && [_delegate respondsToSelector:@selector(ticker:didUpdateRotationTransform:)]) {
         [_delegate ticker:self didUpdateRotationTransform:y];
     }
+}
+
+- (void)tickerViewFlippedToFront:(SLTickerView *)tickerView {
+    if (_delegate && [_delegate respondsToSelector:@selector(tickerFlippedToFront:)]) {
+        [_delegate tickerFlippedToFront:self];
+    }
+}
+
+-(void)tickerViewFlippedToBack:(SLTickerView *)tickerView {
+    if (_delegate && [_delegate respondsToSelector:@selector(tickerFlippedToBack:)]) {
+        [_delegate tickerFlippedToBack:self];
+    }    
 }
 
 #pragma mark - SLDoubleSideTickerView
@@ -97,8 +110,41 @@
     [_view bringSubviewToFront:_frontTicker];    
 }
 
+- (void)sendToBack {
+    [_view sendSubviewToBack:_backTicker];
+    [_view sendSubviewToBack:_frontTicker];
+}
+
 - (void)updateRotationTransform:(CGFloat)y {
     [_frontTicker updateRotationTransform:y];
+}
+
+- (void)reset {
+    self.hidden = YES;
+}
+
+- (void)setHidden:(BOOL)hidden {
+
+    if (hidden) {
+        [UIView animateWithDuration:0 animations:^{
+            [_backTicker.layer setValue:[NSNumber numberWithBool:hidden] forKeyPath:@"hidden"]; 
+            [_frontTicker.layer setValue:[NSNumber numberWithBool:hidden] forKeyPath:@"hidden"];
+        } completion:^(BOOL finished) {
+            [UIView animateWithDuration:0 animations:^{
+                [self updateRotationTransform:0];
+            } completion:^(BOOL finished) {
+                [self sendToBack];
+                [_view insertSubview:_frontTicker aboveSubview:_backTicker];
+                self.hidden = NO;
+            }];        
+        }];        
+    }
+    else {
+        [UIView animateWithDuration:0 animations:^{
+            [_backTicker.layer setValue:[NSNumber numberWithBool:hidden] forKeyPath:@"hidden"]; 
+            [_frontTicker.layer setValue:[NSNumber numberWithBool:hidden] forKeyPath:@"hidden"];
+        }];
+    }
 }
 
 @end
