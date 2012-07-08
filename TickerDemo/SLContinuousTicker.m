@@ -53,37 +53,37 @@
 }
 
 - (void)createBottomTickers {
-    _tickerW = [[SLDoubleSideTicker alloc] initWithFrame:CGRectMake(50, 50, 100, 150) superView:_view];
-    _tickerW.delegate = self;
-    _tickerW.anchorType = TickerViewAnchorTop;
-    _tickerW.frontBackgroundColor = [UIColor greenColor];
-    _tickerW.backBackgroundColor = [UIColor greenColor];
-    _tickerW.frontView = [self labelWithText:@"Awesome.\n(btm)"];
-    _tickerW.backView = [self labelWithText:@"Awesome.\n(btm)"];
-    
-    _tickerX = [[SLDoubleSideTicker alloc] initWithFrame:CGRectMake(50, 50, 100, 150) superView:_view];
-    _tickerX.delegate = self;
-    _tickerX.anchorType = TickerViewAnchorTop;
-    _tickerX.frontBackgroundColor = [UIColor blueColor];
-    _tickerX.backBackgroundColor = [UIColor blueColor];
-    _tickerX.frontView = [self labelWithText:@"Success.\n(btm)"];
-    _tickerX.backView = [self labelWithText:@"Success.\n(btm)"];
+    _tickerZ = [[SLDoubleSideTicker alloc] initWithFrame:CGRectMake(50, 50, 100, 150) superView:_view];
+    _tickerZ.delegate = self;
+    _tickerZ.anchorType = TickerViewAnchorTop;
+    _tickerZ.frontBackgroundColor = [UIColor redColor];
+    _tickerZ.backBackgroundColor = [UIColor redColor];
+    _tickerZ.frontView = [self labelWithText:@"Z"];
+    _tickerZ.backView = [self labelWithText:@"Z"];
     
     _tickerY = [[SLDoubleSideTicker alloc] initWithFrame:CGRectMake(50, 50, 100, 150) superView:_view];
     _tickerY.delegate = self;
     _tickerY.anchorType = TickerViewAnchorTop;
     _tickerY.frontBackgroundColor = [UIColor orangeColor];
     _tickerY.backBackgroundColor = [UIColor orangeColor];
-    _tickerY.frontView = [self labelWithText:@"Complete.\n(btm)"];
-    _tickerY.backView = [self labelWithText:@"Complete.\n(btm)"];
+    _tickerY.frontView = [self labelWithText:@"Y"];
+    _tickerY.backView = [self labelWithText:@"Y"];
     
-    _tickerZ = [[SLDoubleSideTicker alloc] initWithFrame:CGRectMake(50, 50, 100, 150) superView:_view];
-    _tickerZ.delegate = self;
-    _tickerZ.anchorType = TickerViewAnchorTop;
-    _tickerZ.frontBackgroundColor = [UIColor redColor];
-    _tickerZ.backBackgroundColor = [UIColor redColor];
-    _tickerZ.frontView = [self labelWithText:@"Yes.\n(btm)"];
-    _tickerZ.backView = [self labelWithText:@"Yes.\n(btm)"];
+    _tickerX = [[SLDoubleSideTicker alloc] initWithFrame:CGRectMake(50, 50, 100, 150) superView:_view];
+    _tickerX.delegate = self;
+    _tickerX.anchorType = TickerViewAnchorTop;
+    _tickerX.frontBackgroundColor = [UIColor blueColor];
+    _tickerX.backBackgroundColor = [UIColor blueColor];
+    _tickerX.frontView = [self labelWithText:@"X"];
+    _tickerX.backView = [self labelWithText:@"X"];
+    
+    _tickerW = [[SLDoubleSideTicker alloc] initWithFrame:CGRectMake(50, 50, 100, 150) superView:_view];
+    _tickerW.delegate = self;
+    _tickerW.anchorType = TickerViewAnchorTop;
+    _tickerW.frontBackgroundColor = [UIColor greenColor];
+    _tickerW.backBackgroundColor = [UIColor greenColor];
+    _tickerW.frontView = [self labelWithText:@"W"];
+    _tickerW.backView = [self labelWithText:@"W"];
 }
 
 
@@ -96,6 +96,7 @@
         [self createBottomTickers];
         
         _keyTopTicker = _tickerC;
+        _keyBottomTicker = _tickerY;
     }
     return self;
 }
@@ -118,19 +119,21 @@
 
 -(void)tickerFlippedToFront:(SLDoubleSideTicker *)ticker {
     NSLog(@"front");    
-    if (ticker == _tickerC) {
-        
-    }
+
 }
 
 -(void)tickerFlippedToBack:(SLDoubleSideTicker *)ticker {
     NSLog(@"back");  
-
     if (ticker == _keyTopTicker) { 
         SLDoubleSideTicker *tickerToAdjust = [self topTickerToAdjust];
         [tickerToAdjust reset];
         _keyTopTicker = [self nextKeyTopTicker];
-    }
+    }        
+    else if (ticker == _keyBottomTicker) { 
+        SLDoubleSideTicker *tickerToAdjust = [self bottomTickerToAdjust];
+        [tickerToAdjust reset];
+        _keyBottomTicker = [self nextKeyBottomTicker];
+    }        
 }
 
 - (SLDoubleSideTicker *)topTickerToAdjust {
@@ -157,6 +160,32 @@
         return _tickerD;
     }
     return _tickerA;
+}
+
+- (SLDoubleSideTicker *)bottomTickerToAdjust {
+    if (_keyBottomTicker == _tickerW) {
+        return _tickerY;
+    }
+    else if (_keyBottomTicker == _tickerX) {
+        return _tickerZ;
+    }
+    else if (_keyBottomTicker == _tickerY) {
+        return _tickerW;
+    }
+    return _tickerX;
+}
+
+- (SLDoubleSideTicker *)nextKeyBottomTicker {
+    if (_keyBottomTicker == _tickerW) {
+        return _tickerX;
+    }
+    else if (_keyBottomTicker == _tickerX) {
+        return _tickerY;
+    }
+    else if (_keyBottomTicker == _tickerY) {
+        return _tickerZ;
+    }
+    return _tickerW;
 }
 
 @end

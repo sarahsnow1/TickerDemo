@@ -107,6 +107,7 @@
 }
 
 - (void)setFlipSpeed:(TickerViewFlipSpeed)flipSpeed {
+    _flipSpeed = flipSpeed;
     switch (flipSpeed) {
         case TickerViewFlipSpeedFast:
             _flipSpeedThrottle = 1.25;
@@ -120,10 +121,10 @@
         default:
             break;
     }
-    _flipSpeed = flipSpeed;
 }
 
 - (void)setAnchorType:(TickerViewAnchorType)anchorType {
+    _anchorType = anchorType;
     switch (anchorType) {
         case TickerViewAnchorTop:
             self.layer.anchorPoint = CGPointMake(0.5, 0);
@@ -134,7 +135,6 @@
         default:
             break;
     }
-    _anchorType = anchorType;
 }
 
 -(void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
