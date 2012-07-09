@@ -15,9 +15,8 @@
 
 @implementation SLViewController
 
-- (void)ticker:(SLContinuousTicker *)ticker didUpdateRotationTransform:(CGFloat)y {
-//    [ticker bringToFront];
-}
+@synthesize topImageViews = _topImageViews;
+@synthesize bottomImageViews = _bottomImageViews;
 
 -(void)tickerView:(SLTickerView *)tickerView didUpdateRotationTransform:(CGFloat)y {
     //do nothing
@@ -40,13 +39,27 @@
     return lbl;
 }
 
+- (void)setupImageViewArrays {
+    NSMutableArray *tops = [NSMutableArray array];
+    NSMutableArray *bottoms = [NSMutableArray array];
+
+    for (int i = 0; i < 10; i++) {
+        [tops addObject:[self labelWithText:[NSString stringWithFormat:@"%i T",i]]];
+        [bottoms addObject:[self labelWithText:[NSString stringWithFormat:@"%i B",i]]];        
+    }
+    self.topImageViews = tops;
+    self.bottomImageViews = bottoms;
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];
-            
-    _ticker = [[SLContinuousTicker alloc] initWithFrame:CGRectMake(50, 50, 100, 150) superView:self.view];
-    _ticker.delegate = self;
+      
+    [self setupImageViewArrays];
+    
+    _ticker = [[SLPicker alloc] initWithFrame:CGRectMake(50, 50, 100, 150) superView:self.view dataSource:self];
     _ticker.position = CGPointMake(250, 200);
+    [_ticker reloadData];
     
     _testTicker = [[SLTickerView alloc] initWithFrame:CGRectMake(50, 50, 100, 150)];
     _testTicker.backgroundColor = [UIColor greenColor];
@@ -55,6 +68,19 @@
     _testTicker.delegate = self;
     [self.view addSubview:_testTicker];
     
+}
+
+#pragma mark - SLPickerDataSource
+- (NSUInteger)numberOfItemsInPicker {
+    return 10;
+}
+
+- (UIView *)topViewForPicker:(SLContinuousTicker *)picker atPage:(NSUInteger)page {
+    return [_topImageViews objectAtIndex:page];
+}
+
+- (UIView *)bottomViewForPicker:(SLContinuousTicker *)picker atPage:(NSUInteger)page {
+    return [_bottomImageViews objectAtIndex:page];    
 }
 
 @end

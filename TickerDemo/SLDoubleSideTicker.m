@@ -19,6 +19,7 @@
 @synthesize backView = _backView;
 @synthesize frontView = _frontView;
 @synthesize hidden = _hidden;
+@synthesize enabled = _enabled;
 
 - (void)createFrontTicker {
     _frontTicker = [[SLTickerView alloc] initWithFrame:_frame];
@@ -74,12 +75,18 @@
 }
 
 - (void)setBackView:(UIView *)backView {
+    if (_backView) {
+        [_backView removeFromSuperview];
+    }
     backView.layer.transform = CATransform3DMakeRotation(M_PI, 1, 0, 0);
     [_backTicker addSubview:backView];
     _backView = backView;
 }
 
 - (void)setFrontView:(UIView *)backView {
+    if (_frontView) {
+        [_frontView removeFromSuperview];
+    }    
     [_frontTicker addSubview:backView];
     _frontView = backView;
 }
@@ -124,15 +131,17 @@
 }
 
 - (void)setHidden:(BOOL)hidden {
-
+    id refToDelegate = _delegate;
     if (hidden) {
         [UIView animateWithDuration:0 animations:^{
             [_backTicker.layer setValue:[NSNumber numberWithBool:hidden] forKeyPath:@"hidden"]; 
             [_frontTicker.layer setValue:[NSNumber numberWithBool:hidden] forKeyPath:@"hidden"];
         } completion:^(BOOL finished) {
+            _delegate = nil;
             [UIView animateWithDuration:0 animations:^{
                 [self updateRotationTransform:0];
             } completion:^(BOOL finished) {
+                _delegate = refToDelegate;
                 [self sendToBack];
                 [_view insertSubview:_frontTicker aboveSubview:_backTicker];
                 self.hidden = NO;
@@ -145,6 +154,12 @@
             [_frontTicker.layer setValue:[NSNumber numberWithBool:hidden] forKeyPath:@"hidden"];
         }];
     }
+}
+
+- (void)setEnabled:(BOOL)enabled {
+    _backTicker.enabled = enabled;
+    _frontTicker.enabled = enabled;
+    _enabled = enabled;
 }
 
 @end

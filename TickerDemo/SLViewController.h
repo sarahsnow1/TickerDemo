@@ -7,11 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "SLContinuousTicker.h"
+#import "SLPicker.h"
 
-@interface SLViewController : UIViewController <SLContinuousTickerDelegate, SLTickerViewDelegate> {
-    SLContinuousTicker *_ticker;    
+@interface SLViewController : UIViewController <SLTickerViewDelegate, SLPickerDataSource> {
+    SLPicker *_ticker;    
     SLTickerView *_testTicker;
 }
+
+@property (nonatomic, retain) NSArray *topImageViews;
+@property (nonatomic, retain) NSArray *bottomImageViews;
 
 @end

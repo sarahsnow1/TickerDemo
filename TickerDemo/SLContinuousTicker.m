@@ -10,7 +10,6 @@
 
 @implementation SLContinuousTicker
 
-@synthesize delegate = _delegate;
 @synthesize position = _position;
 
 - (UILabel *)labelWithText:(NSString *)text {

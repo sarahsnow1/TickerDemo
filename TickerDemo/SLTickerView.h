@@ -47,6 +47,7 @@ typedef enum {
 @property (nonatomic, assign) id<SLTickerViewDelegate>delegate;
 @property (nonatomic, assign) TickerViewFlipSpeed flipSpeed;
 @property (nonatomic, assign) TickerViewAnchorType anchorType;
+@property (nonatomic, assign) BOOL enabled;
 
 - (void)updateRotationTransform:(CGFloat)y;
 

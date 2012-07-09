@@ -13,6 +13,7 @@
 @synthesize delegate = _delegate;
 @synthesize flipSpeed = _flipSpeed;
 @synthesize anchorType = _anchorType;
+@synthesize enabled = _enabled;
 
 - (void)addPerspective {
     CATransform3D myTransform = CATransform3DIdentity;
@@ -38,6 +39,7 @@
 - (void)addGesture {
     _pan = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(doPan:)];
     [_pan addObserver:self forKeyPath:@"state" options:NSKeyValueObservingOptionNew context:nil];
+    _pan.delegate = self;
     [self addGestureRecognizer:_pan];
 }
 
@@ -47,6 +49,7 @@
     if (self) {
         self.userInteractionEnabled = YES;
         _visibleState = TickerViewAnchorFront;
+        _enabled = YES;
         
         [self addPerspective];
         [self configureAnchor];
@@ -181,5 +184,9 @@
     }
 }
 
+#pragma mark - UIGestureDelegate
+-(BOOL)gestureRecognizerShouldBegin:(UIGestureRecognizer *)gestureRecognizer {
+    return _enabled;
+}
 
 @end

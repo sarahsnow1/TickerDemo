@@ -9,11 +9,6 @@
 #import <Foundation/Foundation.h>
 #import "SLDoubleSideTicker.h"
 
-@class SLContinuousTicker;
-@protocol SLContinuousTickerDelegate <NSObject>
--(void)ticker:(SLContinuousTicker *)ticker didUpdateRotationTransform:(CGFloat)y;
-@end
-
 @interface SLContinuousTicker : NSObject<SLDoubleSideTickerDelegate> {
     CGRect _frame;
     UIView *_view;
@@ -34,7 +29,6 @@
 
 - (id)initWithFrame:(CGRect)frame superView:(UIView *)superview;
 
-@property (nonatomic, assign) id<SLContinuousTickerDelegate>delegate;
 @property (nonatomic, assign) CGPoint position;
 
 @end

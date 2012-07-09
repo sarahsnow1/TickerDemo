@@ -41,6 +41,9 @@
 		7D68817615A94DE000E51F96 /* SLDoubleSideTicker.h in Headers */ = {isa = PBXBuildFile; fileRef = 7D68817415A94DE000E51F96 /* SLDoubleSideTicker.h */; };
 		7D68817715A94DE000E51F96 /* SLDoubleSideTicker.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D68817515A94DE000E51F96 /* SLDoubleSideTicker.m */; };
 		7D68817815A94DE000E51F96 /* SLDoubleSideTicker.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D68817515A94DE000E51F96 /* SLDoubleSideTicker.m */; };
+		7DF502F415A9F51100C79D8E /* SLPicker.h in Headers */ = {isa = PBXBuildFile; fileRef = 7DF502F215A9F51100C79D8E /* SLPicker.h */; };
+		7DF502F515A9F51100C79D8E /* SLPicker.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DF502F315A9F51100C79D8E /* SLPicker.m */; };
+		7DF502F615A9F51100C79D8E /* SLPicker.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DF502F315A9F51100C79D8E /* SLPicker.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -77,6 +80,8 @@
 		7D6880A515A8B6AB00E51F96 /* Ticker.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Ticker.m; sourceTree = "<group>"; };
 		7D68817415A94DE000E51F96 /* SLDoubleSideTicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SLDoubleSideTicker.h; sourceTree = "<group>"; };
 		7D68817515A94DE000E51F96 /* SLDoubleSideTicker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SLDoubleSideTicker.m; sourceTree = "<group>"; };
+		7DF502F215A9F51100C79D8E /* SLPicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SLPicker.h; sourceTree = "<group>"; };
+		7DF502F315A9F51100C79D8E /* SLPicker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SLPicker.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -145,6 +150,8 @@
 				7D68817515A94DE000E51F96 /* SLDoubleSideTicker.m */,
 				7D22CFB315A9B95900EA7862 /* SLContinuousTicker.h */,
 				7D22CFB415A9B95900EA7862 /* SLContinuousTicker.m */,
+				7DF502F215A9F51100C79D8E /* SLPicker.h */,
+				7DF502F315A9F51100C79D8E /* SLPicker.m */,
 				7D68807C15A7960400E51F96 /* Supporting Files */,
 			);
 			path = TickerDemo;
@@ -189,6 +196,7 @@
 				7D6880AC15A8B73700E51F96 /* SLTickerView.h in Headers */,
 				7D68817615A94DE000E51F96 /* SLDoubleSideTicker.h in Headers */,
 				7D22CFB515A9B95900EA7862 /* SLContinuousTicker.h in Headers */,
+				7DF502F415A9F51100C79D8E /* SLPicker.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -310,6 +318,7 @@
 				7D68809415A7964500E51F96 /* SLTickerView.m in Sources */,
 				7D68817715A94DE000E51F96 /* SLDoubleSideTicker.m in Sources */,
 				7D22CFB615A9B95900EA7862 /* SLContinuousTicker.m in Sources */,
+				7DF502F515A9F51100C79D8E /* SLPicker.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -321,6 +330,7 @@
 				7D6880AB15A8B73200E51F96 /* SLTickerView.m in Sources */,
 				7D68817815A94DE000E51F96 /* SLDoubleSideTicker.m in Sources */,
 				7D22CFB715A9B95900EA7862 /* SLContinuousTicker.m in Sources */,
+				7DF502F615A9F51100C79D8E /* SLPicker.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

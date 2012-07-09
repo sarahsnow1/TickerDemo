@@ -32,6 +32,7 @@
 @property (nonatomic, assign) UIView *backView;
 @property (nonatomic, assign) UIView *frontView;
 @property (nonatomic, readonly) BOOL hidden;
+@property (nonatomic, assign) BOOL enabled;
 
 - (id)initWithFrame:(CGRect)frame superView:(UIView *)superview;
 - (void)bringToFront;
