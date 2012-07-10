@@ -21,11 +21,17 @@
         
         _visibleTopTicker = _tickerA;
         _visibleBottomTicker = _tickerW;        
+        
+        _lastVisibleTickerForTopSet = _tickerA;
+        _lastVisibleTickerForBottomSet = _tickerW;
     }
     return self;
 }
 
 - (SLDoubleSideTicker *)nextBottomTickerForBottomSet {
+//    if (_bottomBalance == 0) {
+//        return _lastVisibleTickerForTopSet;
+//    }
     if (_visibleBottomTicker == _tickerW) {
         return _tickerX;
     }
@@ -60,26 +66,29 @@
     if (_topBalance == 0) {
         return _lastVisibleTickerForTopSet;
     }
-    if (_visibleBottomTicker == _tickerC) {
+    if (_visibleTopTicker == _tickerC) {
         return _tickerB;
     }
-    else if (_visibleBottomTicker == _tickerB) {
+    else if (_visibleTopTicker == _tickerB) {
         return _tickerA;
     }
-    else if (_visibleBottomTicker == _tickerA) {
+    else if (_visibleTopTicker == _tickerA) {
         return _tickerD;
     }
     return _tickerC;
 }
 
 - (SLDoubleSideTicker *)nextTopTickerForTopSet {
-    if (_visibleBottomTicker == _tickerA) {
+//    if (_bottomBalance == 0) {
+//        return _lastVisibleTickerForTopSet;
+//    }
+    if (_visibleTopTicker == _tickerA) {
         return _tickerB;
     }
-    else if (_visibleBottomTicker == _tickerB) {
+    else if (_visibleTopTicker == _tickerB) {
         return _tickerC;
     }
-    else if (_visibleBottomTicker == _tickerC) {
+    else if (_visibleTopTicker == _tickerC) {
         return _tickerD;
     }
     return _tickerA;
@@ -107,6 +116,7 @@
         } 
         if (_topBalance == 0) {
             _lastVisibleTickerForTopSet = ticker;
+            _visibleBottomTicker = _lastVisibleTickerForBottomSet;
         }
         _currentPage++;
     }
@@ -119,6 +129,7 @@
         } 
         if (_bottomBalance == 0) {
             _lastVisibleTickerForBottomSet = ticker;
+            _visibleTopTicker = _lastVisibleTickerForTopSet;
         }
         _currentPage--;
     }
@@ -169,7 +180,7 @@
     } else {
         _visibleBottomTicker.frontView = bottomView;
     }
-    
+    NSLog(@"page:%i",_currentPage);
     _visibleTopTicker.enabled = (_currentPage != 0);
     _visibleBottomTicker.enabled = (_currentPage != [_dataSource numberOfItemsInPicker]-1);
 }
