@@ -29,9 +29,6 @@
 }
 
 - (SLDoubleSideTicker *)nextBottomTickerForBottomSet {
-//    if (_bottomBalance == 0) {
-//        return _lastVisibleTickerForTopSet;
-//    }
     if (_visibleBottomTicker == _tickerW) {
         return _tickerX;
     }
@@ -45,6 +42,19 @@
 
 }
 
+- (SLDoubleSideTicker *)prevTopTickerForBottomSet { //for change of dir when bottom > 0 ...need to look at top bc this is when we flip top>bottom
+    if (_visibleTopTicker == _tickerW) {
+        return _tickerZ;
+    }
+    else if (_visibleTopTicker == _tickerX) {
+        return _tickerW;
+    }
+    else if (_visibleTopTicker == _tickerY) {
+        return _tickerX;
+    }
+    return _tickerY;
+}
+
 - (SLDoubleSideTicker *)nextTopTickerForBottomSet {
     if (_bottomBalance == 0) {
         return _lastVisibleTickerForTopSet;
@@ -56,10 +66,22 @@
         return _tickerY;
     }
     else if (_visibleBottomTicker == _tickerY) {
-        return _tickerX;
+        return _tickerZ;
     }
-    return _tickerY;
-    
+    return _tickerW;
+}
+
+- (SLDoubleSideTicker *)prevBottomTickerForTopSet { //for change of dir where top > 0
+    if (_visibleTopTicker == _tickerC) {
+        return _tickerD;
+    }
+    else if (_visibleTopTicker == _tickerB) {
+        return _tickerC;
+    }
+    else if (_visibleTopTicker == _tickerA) {
+        return _tickerB;
+    }
+    return _tickerA;
 }
 
 - (SLDoubleSideTicker *)nextBottomTickerForTopSet {
@@ -79,9 +101,6 @@
 }
 
 - (SLDoubleSideTicker *)nextTopTickerForTopSet {
-//    if (_bottomBalance == 0) {
-//        return _lastVisibleTickerForTopSet;
-//    }
     if (_visibleTopTicker == _tickerA) {
         return _tickerB;
     }
@@ -106,12 +125,15 @@
 #pragma mark - SLDoubleSideTickerDelegate
 -(void)tickerFlippedToFront:(SLDoubleSideTicker *)ticker {
     [super tickerFlippedToFront:ticker];
-    
     if ([self isATopTicker:ticker]) {
         _topBalance--;
         
         if (ticker == _visibleBottomTicker) {
-            _visibleBottomTicker = [self nextBottomTickerForTopSet];        
+            if (_topBalance > 0) {
+                _visibleBottomTicker = [self prevBottomTickerForTopSet];
+            } else {
+                _visibleBottomTicker = [self nextBottomTickerForTopSet];        
+            }
             _visibleTopTicker = ticker;
         } 
         if (_topBalance == 0) {
@@ -124,7 +146,11 @@
         _bottomBalance--;
         
         if (ticker == _visibleTopTicker) {
-            _visibleTopTicker = [self nextTopTickerForBottomSet];        
+            if (_bottomBalance > 0) {
+                _visibleTopTicker = [self prevTopTickerForBottomSet];                        
+            } else {
+                _visibleTopTicker = [self nextTopTickerForBottomSet];        
+            }
             _visibleBottomTicker = ticker;
         } 
         if (_bottomBalance == 0) {
@@ -138,7 +164,6 @@
 
 -(void)tickerFlippedToBack:(SLDoubleSideTicker *)ticker {
     [super tickerFlippedToBack:ticker];
-    
     if ([self isATopTicker:ticker]) {
         if (_topBalance < 2) {
             _topBalance++;
