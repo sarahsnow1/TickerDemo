@@ -72,16 +72,16 @@
 }
 
 - (SLDoubleSideTicker *)prevBottomTickerForTopSet { //for change of dir where top > 0
-    if (_visibleTopTicker == _tickerC) {
+    if (_visibleBottomTicker == _tickerA) {
         return _tickerD;
     }
-    else if (_visibleTopTicker == _tickerB) {
-        return _tickerC;
+    else if (_visibleBottomTicker == _tickerB) {
+        return _tickerA;
     }
-    else if (_visibleTopTicker == _tickerA) {
+    else if (_visibleBottomTicker == _tickerC) {
         return _tickerB;
     }
-    return _tickerA;
+    return _tickerC;
 }
 
 - (SLDoubleSideTicker *)nextBottomTickerForTopSet {
@@ -123,7 +123,7 @@
 }
 
 #pragma mark - SLDoubleSideTickerDelegate
--(void)tickerFlippedToFront:(SLDoubleSideTicker *)ticker {
+- (void)tickerFlippedToFront:(SLDoubleSideTicker *)ticker {
     [super tickerFlippedToFront:ticker];
     if ([self isATopTicker:ticker]) {
         _topBalance--;
@@ -189,23 +189,30 @@
     [self reloadData];    
 }
 
+- (void)reloadTopTicker:(SLDoubleSideTicker *)topTicker bottomTicker:(SLDoubleSideTicker *)bottomTicker atPage:(int)page {
+    
+    UIView *topView = [_dataSource topViewForPicker:self atPage:page];
+    UIView *bottomView = [_dataSource bottomViewForPicker:self atPage:page];
+    
+    if([self isATopTicker:topTicker]) {
+        topTicker.frontView = topView;
+    } else {
+        topTicker.backView = topView;
+    }
+    
+    if([self isATopTicker:bottomTicker]) {
+        bottomTicker.backView = bottomView;
+    } else {
+        bottomTicker.frontView = bottomView;
+    }
+}
+
 #pragma mark - SLPicker
 - (void)reloadData {
-    UIView *topView = [_dataSource topViewForPicker:self atPage:_currentPage];
-    UIView *bottomView = [_dataSource bottomViewForPicker:self atPage:_currentPage];
+    [self reloadTopTicker:_visibleTopTicker bottomTicker:_visibleBottomTicker atPage:_currentPage];
     
-    if([self isATopTicker:_visibleTopTicker]) {
-        _visibleTopTicker.frontView = topView;
-    } else {
-        _visibleTopTicker.backView = topView;
-    }
-    
-    if([self isATopTicker:_visibleBottomTicker]) {
-        _visibleBottomTicker.backView = bottomView;
-    } else {
-        _visibleBottomTicker.frontView = bottomView;
-    }
     NSLog(@"page:%i",_currentPage);
+    
     _visibleTopTicker.enabled = (_currentPage != 0);
     _visibleBottomTicker.enabled = (_currentPage != [_dataSource numberOfItemsInPicker]-1);
 }
