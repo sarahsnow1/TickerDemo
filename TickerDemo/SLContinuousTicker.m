@@ -117,12 +117,10 @@
 }
 
 -(void)tickerFlippedToFront:(SLDoubleSideTicker *)ticker {
-    NSLog(@"front");    
 
 }
 
 -(void)tickerFlippedToBack:(SLDoubleSideTicker *)ticker {
-    NSLog(@"back");  
     if (ticker == _keyTopTicker) { 
         SLDoubleSideTicker *tickerToAdjust = [self topTickerToAdjust];
         [tickerToAdjust reset];

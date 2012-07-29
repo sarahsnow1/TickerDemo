@@ -42,14 +42,17 @@ typedef enum {
     UIPanGestureRecognizer *_pan;    
     
     TickerViewVisibleState _visibleState;
+    BOOL _flipping;
 }
 
 @property (nonatomic, assign) id<SLTickerViewDelegate>delegate;
 @property (nonatomic, assign) TickerViewFlipSpeed flipSpeed;
 @property (nonatomic, assign) TickerViewAnchorType anchorType;
 @property (nonatomic, assign) BOOL enabled;
+@property (nonatomic, assign) CGFloat autoFlipVelocity;
 
 - (void)updateRotationTransform:(CGFloat)y;
+- (void)flip;
 
 @end
 

@@ -123,6 +123,11 @@
 }
 
 #pragma mark - SLDoubleSideTickerDelegate
+- (void)ticker:(SLDoubleSideTicker *)ticker didUpdateRotationTransform:(CGFloat)y {
+    [super ticker:ticker didUpdateRotationTransform:y];
+//    NSLog(@"ticker:%@ transform:%f",ticker,y);
+}
+
 - (void)tickerFlippedToFront:(SLDoubleSideTicker *)ticker {
     [super tickerFlippedToFront:ticker];
     if ([self isATopTicker:ticker]) {
@@ -211,7 +216,7 @@
 - (void)reloadData {
     [self reloadTopTicker:_visibleTopTicker bottomTicker:_visibleBottomTicker atPage:_currentPage];
     
-    NSLog(@"page:%i",_currentPage);
+//    NSLog(@"page:%i",_currentPage);
     
     _visibleTopTicker.enabled = (_currentPage != 0);
     _visibleBottomTicker.enabled = (_currentPage != [_dataSource numberOfItemsInPicker]-1);

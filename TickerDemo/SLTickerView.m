@@ -14,6 +14,7 @@
 @synthesize flipSpeed = _flipSpeed;
 @synthesize anchorType = _anchorType;
 @synthesize enabled = _enabled;
+@synthesize autoFlipVelocity = _autoFlipVelocity;
 
 - (void)addPerspective {
     CATransform3D myTransform = CATransform3DIdentity;
@@ -50,6 +51,8 @@
         self.userInteractionEnabled = YES;
         _visibleState = TickerViewAnchorFront;
         _enabled = YES;
+        _autoFlipVelocity = 150;
+        _flipping = NO;
         
         [self addPerspective];
         [self configureAnchor];
@@ -97,7 +100,54 @@
     return progress;
 }
 
+- (void)flip {
+    _flipping = YES;
+    _pan.enabled = NO;
+    CGFloat angle = fabsf([[self.layer valueForKeyPath:@"transform.rotation.x"] floatValue]);
+    if (angle < M_PI_2) {
+        angle = M_PI;
+    } else {
+        angle = 0;
+    }
+    [UIView animateWithDuration:0.3 animations:^{
+        [self updateRotationTransform:angle];
+    } completion:^(BOOL finished) {
+        [self handleFlippedDelegateCalls:angle];
+        _flipping = NO;
+        _pan.enabled = YES;
+    }];
+}
+
+- (BOOL)canFlip:(UIPanGestureRecognizer *)gesture {
+    if (gesture.state == UIGestureRecognizerStateChanged) {
+        return NO;
+    }
+    CGPoint pt = [gesture velocityInView:self.superview];
+    switch (_anchorType) {
+        case TickerViewAnchorTop: {
+            if ((_visibleState == TickerViewAnchorFront && pt.y > 0) || (_visibleState == TickerViewAnchorBack && pt.y < 0)) {
+                return NO;
+            }        
+            break;
+        }
+        case TickerViewAnchorBottom: {
+            if ((_visibleState == TickerViewAnchorFront && pt.y < 0) || (_visibleState == TickerViewAnchorBack && pt.y > 0)) {
+                return NO;
+            }        
+            break;
+        }
+        default:
+            break;
+    }
+    
+    return fabsf(pt.y) > _autoFlipVelocity;
+}
+
 - (void)doPan:(UIPanGestureRecognizer *)gesture {
+    if (_flipping) {
+        return;
+    }
+    
     if (gesture.state == UIGestureRecognizerStateBegan) {
         CGRect myNormalized = [self convertRect:self.bounds toView:self.superview];
         _normalPanStart = (self.layer.position.y != myNormalized.origin.y);         
@@ -107,6 +157,11 @@
     }
     CGFloat y = [self valueForGesture:gesture];
     [self updateRotationTransform:y];
+
+    //if fast swipe then advance page automatically
+    if ([self canFlip:gesture]) {
+        [self flip];            
+    }
 }
 
 - (void)setFlipSpeed:(TickerViewFlipSpeed)flipSpeed {
@@ -141,6 +196,9 @@
 }
 
 -(void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
+    if (_flipping) {
+        return;
+    }
     int newChange = [[change objectForKey:@"new"] intValue];
     if ((object == _pan) && (newChange == 3)) {
         CGFloat y = fabsf([self valueForGesture:_pan]);
@@ -150,7 +208,7 @@
         } else {
             newY = M_PI;
         }
-        [UIView animateWithDuration:0.5 animations:^{
+        [UIView animateWithDuration:0.3 animations:^{
             [self updateRotationTransform:newY];
         } completion:^(BOOL finished) {
             [self handleFlippedDelegateCalls:newY];
