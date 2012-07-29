@@ -8,6 +8,11 @@
 
 #import "SLPicker.h"
 
+@interface SLContinuousTicker(private)
+- (SLDoubleSideTicker *)nextTopTicker:(SLDoubleSideTicker *)ticker away:(int)numAway;
+- (SLDoubleSideTicker *)nextBottomTicker:(SLDoubleSideTicker *)ticker away:(int)numAway;
+@end
+
 @implementation SLPicker
 
 - (id)initWithFrame:(CGRect)frame superView:(UIView *)superview dataSource:(id<SLPickerDataSource>)dataSource {
@@ -24,6 +29,7 @@
         
         _lastVisibleTickerForTopSet = _tickerA;
         _lastVisibleTickerForBottomSet = _tickerW;
+        
     }
     return self;
 }
@@ -126,6 +132,11 @@
 - (void)ticker:(SLDoubleSideTicker *)ticker didUpdateRotationTransform:(CGFloat)y {
     [super ticker:ticker didUpdateRotationTransform:y];
 //    NSLog(@"ticker:%@ transform:%f",ticker,y);
+    
+    if (_currentlyDraggingTicker != ticker) {
+        _currentlyDraggingTicker = ticker;
+        [self preloadData];        
+    }
 }
 
 - (void)tickerFlippedToFront:(SLDoubleSideTicker *)ticker {
@@ -195,14 +206,8 @@
 }
 
 - (void)reloadTopTicker:(SLDoubleSideTicker *)topTicker bottomTicker:(SLDoubleSideTicker *)bottomTicker atPage:(int)page {
-    
     UIView *topView = [_dataSource topViewForPicker:self atPage:page];
-//    topView.layer.transform = CATransform3DIdentity;
-    
     UIView *bottomView = [_dataSource bottomViewForPicker:self atPage:page];
-//    bottomView.layer.transform = CATransform3DIdentity;
-    
-    NSLog(@"topFrame:%@ bottomFrame:%@",NSStringFromCGRect(topView.frame),NSStringFromCGRect(bottomView.frame));
     
     if([self isATopTicker:topTicker]) {
         topTicker.frontView = topView;
@@ -217,12 +222,85 @@
     }
 }
 
+- (void)preloadData {
+    int page = _currentPage;
+    
+    //prev
+    if(([self isATopTicker:_currentlyDraggingTicker] && _currentlyDraggingTicker.visibleState == TickerViewAnchorFront) || 
+       ([self isABottomTicker:_currentlyDraggingTicker] && _currentlyDraggingTicker.visibleState == TickerViewAnchorBack)) {    
+        page = page - 1;
+        if (page < 0) {
+            return;
+        }
+        
+        UIView *topView = [_dataSource topViewForPicker:self atPage:page];
+        UIView *bottomView = [_dataSource bottomViewForPicker:self atPage:page];
+        
+        if ([self isATopTicker:_visibleTopTicker]) {
+            SLDoubleSideTicker *nextTop = [self nextTopTicker:_visibleTopTicker away:1];
+            nextTop.frontView = topView;
+            
+            _visibleTopTicker.backView = bottomView;
+        }
+        else {
+            SLDoubleSideTicker *nextTop = [self prevTopTickerForBottomSet];
+            if (_bottomBalance == 1) {
+                nextTop = _lastVisibleTickerForTopSet;
+                nextTop.frontView = topView;
+            }
+            else {
+                nextTop.backView = topView;
+            }
+            
+            if ([self isABottomTicker:_visibleTopTicker]) {
+                _visibleTopTicker.frontView = bottomView;
+            }
+            else {
+                _visibleTopTicker.backView = bottomView;    
+            }
+        }
+        
+    }
+    else { //next
+        page = page + 1;
+        if (page > [_dataSource numberOfItemsInPicker] - 1) {
+            return;
+        }
+        
+        UIView *topView = [_dataSource topViewForPicker:self atPage:page];
+        UIView *bottomView = [_dataSource bottomViewForPicker:self atPage:page];
+        
+        if ([self isATopTicker:_visibleBottomTicker]) {
+            SLDoubleSideTicker *nextBtm = [self prevBottomTickerForTopSet];
+            if (_topBalance == 1) {
+                nextBtm = _lastVisibleTickerForBottomSet;
+                nextBtm.frontView = bottomView;                
+            }
+            else {
+                nextBtm.backView = bottomView;
+            }
+            
+            if ([self isATopTicker:_visibleBottomTicker]) {
+                _visibleBottomTicker.frontView = topView;
+            }
+            else {
+                _visibleBottomTicker.backView = topView;
+            }
+            
+        }
+        else {
+            SLDoubleSideTicker *nextBtm = [self nextBottomTickerForBottomSet];
+            nextBtm.frontView = bottomView;
+            
+            _visibleBottomTicker.backView = topView;
+        }
+    }
+}
+
+
 #pragma mark - SLPicker
 - (void)reloadData {
-    [CATransaction begin];
     [self reloadTopTicker:_visibleTopTicker bottomTicker:_visibleBottomTicker atPage:_currentPage];
-    [CATransaction commit];
-//    NSLog(@"page:%i",_currentPage);
     
     _visibleTopTicker.enabled = (_currentPage != 0);
     _visibleBottomTicker.enabled = (_currentPage != [_dataSource numberOfItemsInPicker]-1);

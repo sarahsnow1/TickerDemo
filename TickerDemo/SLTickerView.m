@@ -15,6 +15,7 @@
 @synthesize anchorType = _anchorType;
 @synthesize enabled = _enabled;
 @synthesize autoFlipVelocity = _autoFlipVelocity;
+@synthesize visibleState;
 
 - (void)addPerspective {
     CATransform3D myTransform = CATransform3DIdentity;
@@ -193,6 +194,10 @@
         default:
             break;
     }
+}
+
+- (TickerViewVisibleState)visibleState {
+    return _visibleState; 
 }
 
 -(void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {

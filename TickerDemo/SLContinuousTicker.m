@@ -49,6 +49,8 @@
     _tickerA.backBackgroundColor = [UIColor greenColor];
     _tickerA.frontView = [self labelWithText:@"A"];
     _tickerA.backView = [self labelWithText:@"A"];
+    
+    _topTickers = [[NSArray alloc] initWithObjects:_tickerA, _tickerB, _tickerC, _tickerD, nil];
 }
 
 - (void)createBottomTickers {    
@@ -83,6 +85,8 @@
     _tickerW.backBackgroundColor = [UIColor greenColor];
     _tickerW.frontView = [self labelWithText:@"W"];
     _tickerW.backView = [self labelWithText:@"W"];
+    
+    _bottomTickers = [[NSArray alloc] initWithObjects:_tickerW, _tickerX, _tickerY, _tickerZ, nil];
 }
 
 
@@ -98,6 +102,12 @@
         _keyBottomTicker = _tickerY;
     }
     return self;
+}
+
+- (void)dealloc {
+    [_topTickers release];
+    [_bottomTickers release];
+    [super dealloc];
 }
 
 - (void)setPosition:(CGPoint)position {
@@ -146,17 +156,26 @@
     return _tickerB;
 }
 
+- (SLDoubleSideTicker *)nextTopTicker:(SLDoubleSideTicker *)ticker away:(int)numAway {
+    int startingIndex = -1;
+    if (ticker == _tickerA) {
+        startingIndex = 0;
+    }
+    else if (ticker == _tickerB) {
+        startingIndex = 1;
+    }
+    else if (ticker == _tickerC) {
+        startingIndex = 2;
+    } 
+    else {
+        startingIndex = 3;
+    }
+    int index = (startingIndex + numAway) % _topTickers.count;
+    return [_topTickers objectAtIndex:index];
+}
+
 - (SLDoubleSideTicker *)nextKeyTopTicker {
-    if (_keyTopTicker == _tickerA) {
-        return _tickerB;
-    }
-    else if (_keyTopTicker == _tickerB) {
-        return _tickerC;
-    }
-    else if (_keyTopTicker == _tickerC) {
-        return _tickerD;
-    }
-    return _tickerA;
+    return [self nextTopTicker:_keyTopTicker away:1];
 }
 
 - (SLDoubleSideTicker *)bottomTickerToAdjust {
@@ -172,17 +191,26 @@
     return _tickerX;
 }
 
-- (SLDoubleSideTicker *)nextKeyBottomTicker {
-    if (_keyBottomTicker == _tickerW) {
-        return _tickerX;
+- (SLDoubleSideTicker *)nextBottomTicker:(SLDoubleSideTicker *)ticker away:(int)numAway {
+    int startingIndex = -1;
+    if (ticker == _tickerW) {
+        startingIndex = 0;
     }
-    else if (_keyBottomTicker == _tickerX) {
-        return _tickerY;
+    else if (ticker == _tickerX) {
+        startingIndex = 1;
     }
     else if (_keyBottomTicker == _tickerY) {
-        return _tickerZ;
+        startingIndex = 2;
     }
-    return _tickerW;
+    else {
+        startingIndex = 3;
+    }
+    int index = (startingIndex + numAway) % _bottomTickers.count;
+    return [_bottomTickers objectAtIndex:index];
+}
+
+- (SLDoubleSideTicker *)nextKeyBottomTicker {
+    return [self nextBottomTicker:_keyBottomTicker away:1];
 }
 
 @end

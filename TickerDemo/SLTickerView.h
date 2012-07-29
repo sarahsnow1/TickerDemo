@@ -50,6 +50,7 @@ typedef enum {
 @property (nonatomic, assign) TickerViewAnchorType anchorType;
 @property (nonatomic, assign) BOOL enabled;
 @property (nonatomic, assign) CGFloat autoFlipVelocity;
+@property (nonatomic, readonly) TickerViewVisibleState visibleState;
 
 - (void)updateRotationTransform:(CGFloat)y;
 - (void)flip;

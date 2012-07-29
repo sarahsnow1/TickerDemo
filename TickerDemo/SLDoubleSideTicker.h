@@ -33,6 +33,7 @@
 @property (nonatomic, assign) UIView *frontView;
 @property (nonatomic, readonly) BOOL hidden;
 @property (nonatomic, assign) BOOL enabled;
+@property (nonatomic, readonly) TickerViewVisibleState visibleState;
 
 - (id)initWithFrame:(CGRect)frame superView:(UIView *)superview;
 - (void)bringToFront;

@@ -13,6 +13,9 @@
     CGRect _frame;
     UIView *_view;
     
+    NSArray *_topTickers;
+    NSArray *_bottomTickers;
+    
     SLDoubleSideTicker *_tickerA;
     SLDoubleSideTicker *_tickerB;
     SLDoubleSideTicker *_tickerC;   

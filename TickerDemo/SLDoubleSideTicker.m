@@ -20,6 +20,7 @@
 @synthesize frontView = _frontView;
 @synthesize hidden = _hidden;
 @synthesize enabled = _enabled;
+@synthesize visibleState;
 
 - (void)createFrontTicker {
     _frontTicker = [[SLTickerView alloc] initWithFrame:_frame];
@@ -165,6 +166,10 @@
     _backTicker.enabled = enabled;
     _frontTicker.enabled = enabled;
     _enabled = enabled;
+}
+
+- (TickerViewVisibleState)visibleState {
+    return _frontTicker.visibleState;
 }
 
 @end

@@ -21,6 +21,9 @@
     
     int _topBalance;
     int _bottomBalance;
+    
+    SLDoubleSideTicker *_currentlyDraggingTicker;
+    
     SLDoubleSideTicker *_visibleTopTicker;
     SLDoubleSideTicker *_visibleBottomTicker;        
     
