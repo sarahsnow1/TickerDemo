@@ -9,9 +9,13 @@
 #import <UIKit/UIKit.h>
 #import "SLPicker.h"
 
+@class SLDoubleSideTicker;
+@class SLContinuousTicker;
+
 @interface SLViewController : UIViewController <SLTickerViewDelegate, SLPickerDataSource> {
     SLPicker *_ticker;    
-    SLTickerView *_testTicker;
+    SLContinuousTicker *_testTicker;
+    SLDoubleSideTicker *_doubleSide;
 }
 
 @property (nonatomic, retain) NSArray *topImageViews;

@@ -30,7 +30,12 @@
 
 - (void)createBackTicker {
     _backTicker = [[SLTickerView alloc] initWithFrame:_frame];
+    _backTicker.anchorType = TickerViewAnchorBottom;
+    _backTicker.layer.doubleSided = NO;    
+    _backTicker.hidden = YES;
+    [_backTicker flip];
     [_view addSubview:_backTicker];    
+    _backTicker.hidden = NO;    
 }
 
 
@@ -41,13 +46,14 @@
         _view = superview;
         [self createBackTicker];        
         [self createFrontTicker];
+        self.anchorType = TickerViewAnchorBottom;
     }
     return self;
 }
 
 #pragma mark - Overwrite Setters
 - (void)setAnchorType:(TickerViewAnchorType)anchorType {
-    _backTicker.anchorType = anchorType;
+    _backTicker.anchorType = (anchorType == TickerViewAnchorBottom)?TickerViewAnchorTop:TickerViewAnchorBottom;
     _frontTicker.anchorType = anchorType;
     _anchorType = anchorType;
 }
@@ -78,22 +84,21 @@
     if (_backView) {
         [_backView removeFromSuperview];
     }
-    backView.layer.transform = CATransform3DMakeRotation(M_PI, 1, 0, 0);
     [_backTicker addSubview:backView];
     _backView = backView;
 }
 
-- (void)setFrontView:(UIView *)backView {
+- (void)setFrontView:(UIView *)frontView {
     if (_frontView) {
         [_frontView removeFromSuperview];
-    }    
-    [_frontTicker addSubview:backView];
-    _frontView = backView;
+    }  
+    [_frontTicker addSubview:frontView];
+    _frontView = frontView;
 }
 
 #pragma mark - SLTickerViewDelegate
 - (void)tickerView:(SLTickerView *)tickerView didUpdateRotationTransform:(CGFloat)y {
-    [_backTicker updateRotationTransform:y];
+    [_backTicker updateRotationTransform:(y-M_PI)];
     if (_delegate && [_delegate respondsToSelector:@selector(ticker:didUpdateRotationTransform:)]) {
         [_delegate ticker:self didUpdateRotationTransform:y];
     }

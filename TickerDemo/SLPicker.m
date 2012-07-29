@@ -197,7 +197,12 @@
 - (void)reloadTopTicker:(SLDoubleSideTicker *)topTicker bottomTicker:(SLDoubleSideTicker *)bottomTicker atPage:(int)page {
     
     UIView *topView = [_dataSource topViewForPicker:self atPage:page];
+//    topView.layer.transform = CATransform3DIdentity;
+    
     UIView *bottomView = [_dataSource bottomViewForPicker:self atPage:page];
+//    bottomView.layer.transform = CATransform3DIdentity;
+    
+    NSLog(@"topFrame:%@ bottomFrame:%@",NSStringFromCGRect(topView.frame),NSStringFromCGRect(bottomView.frame));
     
     if([self isATopTicker:topTicker]) {
         topTicker.frontView = topView;
@@ -214,8 +219,9 @@
 
 #pragma mark - SLPicker
 - (void)reloadData {
+    [CATransaction begin];
     [self reloadTopTicker:_visibleTopTicker bottomTicker:_visibleBottomTicker atPage:_currentPage];
-    
+    [CATransaction commit];
 //    NSLog(@"page:%i",_currentPage);
     
     _visibleTopTicker.enabled = (_currentPage != 0);

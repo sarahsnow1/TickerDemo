@@ -7,7 +7,8 @@
 //
 
 #import "SLViewController.h"
-
+#import "SLContinuousTicker.h"
+#import "SLDoubleSideTicker.h"
 
 @interface SLViewController ()
 
@@ -39,13 +40,27 @@
     return lbl;
 }
 
+- (UIColor *)randomColor {
+    return [UIColor colorWithRed:((float)rand() / RAND_MAX)
+                        green:((float)rand() / RAND_MAX)
+                         blue:((float)rand() / RAND_MAX)
+                        alpha:1.0f];
+}
+
 - (void)setupImageViewArrays {
     NSMutableArray *tops = [NSMutableArray array];
     NSMutableArray *bottoms = [NSMutableArray array];
 
     for (int i = 0; i < 10; i++) {
-        [tops addObject:[self labelWithText:[NSString stringWithFormat:@"%i T",i]]];
-        [bottoms addObject:[self labelWithText:[NSString stringWithFormat:@"%i B",i]]];        
+        UIColor *color = [self randomColor];
+        
+        UILabel *topLabel = [self labelWithText:[NSString stringWithFormat:@"%i T",i]];
+        topLabel.backgroundColor = color;
+        [tops addObject:topLabel];
+        
+        UILabel *bottomLabel = [self labelWithText:[NSString stringWithFormat:@"%i B",i]];
+        bottomLabel.backgroundColor = color;
+        [bottoms addObject:bottomLabel];        
     }
     self.topImageViews = tops;
     self.bottomImageViews = bottoms;
@@ -61,12 +76,18 @@
     _ticker.position = CGPointMake(250, 200);
     [_ticker reloadData];
     
-    _testTicker = [[SLTickerView alloc] initWithFrame:CGRectMake(50, 50, 100, 150)];
-    _testTicker.backgroundColor = [UIColor greenColor];
-    _testTicker.layer.position = CGPointMake(100, 200);
-    _testTicker.anchorType = TickerViewAnchorTop;
-    _testTicker.delegate = self;
-    [self.view addSubview:_testTicker];
+    
+//    _doubleSide = [[SLDoubleSideTicker alloc] initWithFrame:CGRectMake(50, 150, 100, 150) superView:self.view];
+//    _doubleSide.frontView = [self labelWithText:@"front"];
+//    UILabel *lbl = [self labelWithText:@"back"];
+//    lbl.backgroundColor = [UIColor redColor];
+//    _doubleSide.backView = lbl;
+//    _doubleSide.frontBackgroundColor = [UIColor greenColor];
+//    _doubleSide.backBackgroundColor = [UIColor blueColor];
+//    _doubleSide.anchorType = TickerViewAnchorBottom;
+    
+    _testTicker = [[SLContinuousTicker alloc] initWithFrame:CGRectMake(50, 150, 100, 150) superView:self.view];
+    _testTicker.position = CGPointMake(100, 200);
     
 }
 

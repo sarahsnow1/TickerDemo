@@ -22,28 +22,28 @@
 }
 
 - (void)createTopTickers {    
-    _tickerD = [[SLDoubleSideTicker alloc] initWithFrame:CGRectMake(50, 50, 100, 150) superView:_view];
+    _tickerD = [[SLDoubleSideTicker alloc] initWithFrame:_frame superView:_view];
     _tickerD.delegate = self;
     _tickerD.frontBackgroundColor = [UIColor redColor];
     _tickerD.backBackgroundColor = [UIColor redColor];
     _tickerD.frontView = [self labelWithText:@"D"];
     _tickerD.backView = [self labelWithText:@"D"];
     
-    _tickerC = [[SLDoubleSideTicker alloc] initWithFrame:CGRectMake(50, 50, 100, 150) superView:_view];
+    _tickerC = [[SLDoubleSideTicker alloc] initWithFrame:_frame superView:_view];
     _tickerC.delegate = self;
     _tickerC.frontBackgroundColor = [UIColor orangeColor];
     _tickerC.backBackgroundColor = [UIColor orangeColor];
     _tickerC.frontView = [self labelWithText:@"C"];
     _tickerC.backView = [self labelWithText:@"C"];
     
-    _tickerB = [[SLDoubleSideTicker alloc] initWithFrame:CGRectMake(50, 50, 100, 150) superView:_view];
+    _tickerB = [[SLDoubleSideTicker alloc] initWithFrame:_frame superView:_view];
     _tickerB.delegate = self;
     _tickerB.frontBackgroundColor = [UIColor blueColor];
     _tickerB.backBackgroundColor = [UIColor blueColor];
     _tickerB.frontView = [self labelWithText:@"B"];
     _tickerB.backView = [self labelWithText:@"B"];
     
-    _tickerA = [[SLDoubleSideTicker alloc] initWithFrame:CGRectMake(50, 50, 100, 150) superView:_view];
+    _tickerA = [[SLDoubleSideTicker alloc] initWithFrame:_frame superView:_view];
     _tickerA.delegate = self;
     _tickerA.frontBackgroundColor = [UIColor greenColor];
     _tickerA.backBackgroundColor = [UIColor greenColor];
@@ -51,8 +51,8 @@
     _tickerA.backView = [self labelWithText:@"A"];
 }
 
-- (void)createBottomTickers {
-    _tickerZ = [[SLDoubleSideTicker alloc] initWithFrame:CGRectMake(50, 50, 100, 150) superView:_view];
+- (void)createBottomTickers {    
+    _tickerZ = [[SLDoubleSideTicker alloc] initWithFrame:_frame superView:_view];
     _tickerZ.delegate = self;
     _tickerZ.anchorType = TickerViewAnchorTop;
     _tickerZ.frontBackgroundColor = [UIColor redColor];
@@ -60,7 +60,7 @@
     _tickerZ.frontView = [self labelWithText:@"Z"];
     _tickerZ.backView = [self labelWithText:@"Z"];
     
-    _tickerY = [[SLDoubleSideTicker alloc] initWithFrame:CGRectMake(50, 50, 100, 150) superView:_view];
+    _tickerY = [[SLDoubleSideTicker alloc] initWithFrame:_frame superView:_view];
     _tickerY.delegate = self;
     _tickerY.anchorType = TickerViewAnchorTop;
     _tickerY.frontBackgroundColor = [UIColor orangeColor];
@@ -68,7 +68,7 @@
     _tickerY.frontView = [self labelWithText:@"Y"];
     _tickerY.backView = [self labelWithText:@"Y"];
     
-    _tickerX = [[SLDoubleSideTicker alloc] initWithFrame:CGRectMake(50, 50, 100, 150) superView:_view];
+    _tickerX = [[SLDoubleSideTicker alloc] initWithFrame:_frame superView:_view];
     _tickerX.delegate = self;
     _tickerX.anchorType = TickerViewAnchorTop;
     _tickerX.frontBackgroundColor = [UIColor blueColor];
@@ -76,7 +76,7 @@
     _tickerX.frontView = [self labelWithText:@"X"];
     _tickerX.backView = [self labelWithText:@"X"];
     
-    _tickerW = [[SLDoubleSideTicker alloc] initWithFrame:CGRectMake(50, 50, 100, 150) superView:_view];
+    _tickerW = [[SLDoubleSideTicker alloc] initWithFrame:_frame superView:_view];
     _tickerW.delegate = self;
     _tickerW.anchorType = TickerViewAnchorTop;
     _tickerW.frontBackgroundColor = [UIColor greenColor];
