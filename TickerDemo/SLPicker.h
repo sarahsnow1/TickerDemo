@@ -10,7 +10,7 @@
 
 @class SLPicker;
 @protocol SLPickerDataSource <NSObject>
-- (NSUInteger)numberOfItemsInPicker;
+- (NSUInteger)numberOfItemsInPicker:(SLPicker *)picker;
 - (UIView *)topViewForPicker:(SLPicker *)picker atPage:(NSUInteger)page;
 - (UIView *)bottomViewForPicker:(SLPicker *)picker atPage:(NSUInteger)page;
 @end
@@ -30,6 +30,8 @@
     SLDoubleSideTicker *_lastVisibleTickerForTopSet;
     SLDoubleSideTicker *_lastVisibleTickerForBottomSet;    
 }
+
+@property (nonatomic, readonly) int currentPage;
 
 - (id)initWithFrame:(CGRect)frame superView:(UIView *)superview dataSource:(id<SLPickerDataSource>)dataSource;
 - (void)reloadData;

@@ -15,6 +15,8 @@
 
 @implementation SLPicker
 
+@synthesize currentPage = _currentPage;
+
 - (id)initWithFrame:(CGRect)frame superView:(UIView *)superview dataSource:(id<SLPickerDataSource>)dataSource {
     self = [super initWithFrame:frame superView:superview];
     if(self) {
@@ -263,7 +265,7 @@
     }
     else { //next
         page = page + 1;
-        if (page > [_dataSource numberOfItemsInPicker] - 1) {
+        if (page > [_dataSource numberOfItemsInPicker:self] - 1) {
             return;
         }
         
@@ -303,7 +305,7 @@
     [self reloadTopTicker:_visibleTopTicker bottomTicker:_visibleBottomTicker atPage:_currentPage];
     
     _visibleTopTicker.enabled = (_currentPage != 0);
-    _visibleBottomTicker.enabled = (_currentPage != [_dataSource numberOfItemsInPicker]-1);
+    _visibleBottomTicker.enabled = (_currentPage != [_dataSource numberOfItemsInPicker:self]-1);
 }
 
 @end
